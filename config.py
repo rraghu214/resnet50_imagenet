@@ -12,7 +12,7 @@ class Config:
     num_classes: int = 1000
     
     # Dataset Configuration
-    dataset: str = "imagenet1k"  # "imagenet1k", "imagenet100", "tiny_imagenet"
+    dataset: str = "imagenet1k"  # "imagenet1k", "imagenet100k", "tiny_imagenet"
     data_dir: str = "./data"
     
     # Training Configuration

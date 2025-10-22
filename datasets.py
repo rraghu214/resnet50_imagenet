@@ -326,7 +326,6 @@ def optimize_ec2_data_loading(config):
         print(f"Optimized EC2 data loading: {config.num_workers} workers")
 
 # Original functions continue here...
-# ...existing code...
 def setup_colab_dataset(config):
     """Setup dataset for Google Colab"""
     if config.platform == "colab":
@@ -334,16 +333,16 @@ def setup_colab_dataset(config):
             from google.colab import drive
             drive.mount('/content/drive')
             print("Google Drive mounted successfully")
-
-            #Ensure the dataset diurectory exists
+            
+            # Ensure the dataset directory exists
             os.makedirs(config.data_dir, exist_ok=True)
-            print(f"Data directory setup {config.data_dir}")
-
+            print(f"Dataset directory setup: {config.data_dir}")
+            
         except ImportError:
             print("Not running on Google Colab")
-            return False        
+            return False
         except Exception as e:
             print(f"Error mounting Google Drive: {e}")
             return False
+    
     return True
-

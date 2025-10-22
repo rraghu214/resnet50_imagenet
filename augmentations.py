@@ -24,7 +24,7 @@ class ImageNetAugmentations:
         size = current_size or self.img_size
         
         transforms = [
-            A.RandomResizedCrop(size=(size,size), scale=self.config.crop_scale, p=1.0,ratio=(0.75, 1.33)),
+            A.RandomResizedCrop(size=(size, size), scale=self.config.crop_scale, ratio=(0.75, 1.33), p=1.0),
             A.HorizontalFlip(p=0.5),
         ]
         
@@ -40,20 +40,20 @@ class ImageNetAugmentations:
                 )
             )
         
-        # Additional augmentations
+        # Additional augmentations  
         transforms.extend([
             A.CoarseDropout(
                 num_holes_range=(1, 1),
                 hole_height_range=(size//8, size//4),
-                hole_width_range=(size//8, size//4),                
-                fill_value=tuple([int(x*255) for x in self.mean]),
+                hole_width_range=(size//8, size//4),
+                fill=tuple([int(x * 255) for x in self.mean]),
                 fill_mask=None,
                 p=0.5
             ),
             A.Affine(
-                translate_percent=0.1,
-                scale=(0.9, 1.1),
-                rotate=(-15, 15),
+                translate_percent=0.1, 
+                scale=(0.9, 1.1), 
+                rotate=(-15, 15), 
                 p=0.5
             ),
         ])
@@ -74,7 +74,7 @@ class ImageNetAugmentations:
     def get_val_transforms(self):
         """Get validation augmentations"""
         return A.Compose([
-            A.Resize(size=(256,256)),
+            A.Resize(256, 256),
             A.CenterCrop(self.img_size, self.img_size),
             A.Normalize(mean=self.mean, std=self.std),
             ToTensorV2()
@@ -182,7 +182,6 @@ class AutoAugment:
             A.OneOf([
                 A.Blur(blur_limit=3),
                 A.MotionBlur(blur_limit=3),
-                # A.GaussNoise(var_limit=(10.0, 50.0)),
                 A.ISONoise(color_shift=(0.01, 0.05), intensity=(0.1, 0.5)),
             ], p=0.3),
         ])

@@ -4,7 +4,7 @@ Training class with comprehensive training loop
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.cuda.amp import autocast, GradScaler
+from torch.amp import autocast,GradScaler
 import time
 import os
 from collections import defaultdict
@@ -35,7 +35,7 @@ class Trainer:
         self.criterion = nn.CrossEntropyLoss(label_smoothing=config.label_smoothing)
         
         # Mixed precision scaler
-        self.scaler = GradScaler() if config.mixed_precision else None
+        self.scaler = GradScaler('cuda') if config.mixed_precision else None
         
         # Device
         self.device = torch.device(config.device if torch.cuda.is_available() else 'cpu')
@@ -83,7 +83,7 @@ class Trainer:
             self.optimizer.zero_grad()
             
             if self.config.mixed_precision:
-                with autocast():
+                with autocast('cuda'):
                     output = self.model(data)
                     loss = self._calculate_loss(output, target)
                 
@@ -169,7 +169,7 @@ class Trainer:
                     data = data.to(memory_format=torch.channels_last)
                 
                 if self.config.mixed_precision:
-                    with autocast():
+                    with autocast('cuda'):
                         output = self.model(data)
                         loss = self.criterion(output, target)
                 else:
