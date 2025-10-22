@@ -171,7 +171,7 @@ class TinyImageNetDataset(Dataset):
             
             if os.path.exists(class_path):
                 for img_name in os.listdir(class_path):
-                    if img_name.endswith(('.jpg', '.jpeg', '.png')):
+                    if img_name.endswith(('.jpg', '.jpeg', '.png','.JPEG')):
                         img_path = os.path.join(class_path, img_name)
                         self.samples.append((img_path, i))
     
