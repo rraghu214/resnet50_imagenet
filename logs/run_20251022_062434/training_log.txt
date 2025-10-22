@@ -1,0 +1,53 @@
+Training Log - 2025-10-22 06:24:34
+================================================================================
+Configuration:
+  model_name: resnet50
+  num_classes: 1000
+  dataset: imagenet100
+  data_dir: ./data
+  epochs: 50
+  batch_size: 128
+  num_workers: 8
+  pin_memory: True
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.05
+  momentum: 0.9
+  scheduler: onecycle
+  max_lr: 0.001
+  pct_start: 0.3
+  div_factor: 25
+  final_div_factor: 10000
+  img_size: 224
+  crop_scale: (0.08, 1.0)
+  color_jitter: 0.4
+  auto_augment: True
+  mixup_alpha: 0.2
+  cutmix_alpha: 1.0
+  mixed_precision: True
+  gradient_clipping: 1.0
+  label_smoothing: 0.1
+  model_ema: True
+  ema_decay: 0.9999
+  progressive_resize: False
+  progressive_epochs: None
+  log_dir: ./logs\run_20251022_062434
+  save_dir: ./checkpoints
+  log_interval: 100
+  save_interval: 10
+  plot_interval: 10
+  platform: local
+  device: cuda
+  ebs_snapshot_id: None
+  ebs_volume_size: 500
+  ebs_volume_type: gp3
+  ebs_iops: 4000
+  ebs_throughput: 500
+================================================================================
+
+System Information:
+CUDA Available: True
+CUDA Version: 11.8
+PyTorch Version: 2.7.1+cu118
+GPU Count: 1
+GPU 0: NVIDIA GeForce RTX 2070 with Max-Q Design (8.6 GB)
